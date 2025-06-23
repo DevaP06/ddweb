@@ -11,6 +11,19 @@ async function loadJokes() {
   }
 }
 
+document.getElementById("jokeButton").addEventListener("click", getJoke);
+
+function getJoke() {
+  fetch("/joke")
+    .then((res) => res.json())
+    .then((data) => {
+      document.getElementById("jokeText").innerText = data.joke;
+    })
+    .catch((err) => {
+      document.getElementById("jokeText").innerText = "Failed to load joke.";
+      console.error(err);
+    });
+}
 
 function showJoke() {
   if (jokes.length === 0) return;

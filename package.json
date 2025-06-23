@@ -1,0 +1,19 @@
+{
+    "name": "ddweb",
+    "version": "1.0.0",
+    "description": "deploying code to prod for the first time (to learn)",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js"
+    },
+    "keywords": [
+      "node",
+      "chai"
+    ],
+    "author1": "Dhruv Pekhale",
+    "license": "ISC",
+    "dependencies": {
+      "dotenv": "^16.5.0",
+      "express": "^5.1.0"
+    }
+  }

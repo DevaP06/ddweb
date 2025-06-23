@@ -1,36 +1,21 @@
-let jokes = [];
+// Load a joke when the page loads
+window.onload = getJoke;
 
-async function loadJokes() {
-  try {
-    const response = await fetch('/joke');  // ✅ now hitting backend
-    const data = await response.json();
-    document.getElementById('joke-box').textContent = data.joke;
-  } catch (error) {
-    document.getElementById('joke-box').textContent = "Failed to load joke.";
-    console.error(error);
-  }
-}
-
-document.getElementById("jokeButton").addEventListener("click", getJoke);
-
+// Fetch and display a new joke
 function getJoke() {
+  const jokeBox = document.getElementById("joke-box");
+  jokeBox.innerText = "Loading... 🤔";
+
   fetch("/joke")
     .then((res) => res.json())
     .then((data) => {
-      document.getElementById("jokeText").innerText = data.joke;
+      jokeBox.innerText = data.joke;
     })
     .catch((err) => {
-      document.getElementById("jokeText").innerText = "Failed to load joke.";
-      console.error(err);
+      console.error("Error fetching joke:", err);
+      jokeBox.innerText = "Failed to load joke. 😢";
     });
 }
 
-function showJoke() {
-  if (jokes.length === 0) return;
-  const index = Math.floor(Math.random() * jokes.length);
-  document.getElementById('joke-box').textContent = jokes[index].text;
-}
-
-document.getElementById('joke-btn').addEventListener('click', showJoke);
-
-window.onload = loadJokes;
+// Attach event to the "Tell me another!" button
+document.getElementById("joke-btn").addEventListener("click", getJoke);
